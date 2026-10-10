@@ -22,8 +22,7 @@ jobs:
           cache: maven
 
       - name: Build plugin
-        run: mvn --batch-mode clean package
-
+        run: mvn --batch-mode -f Universe7Leaderboard/pom.xml clean package
       - name: Upload plugin JAR
         uses: actions/upload-artifact@v4
         with:
