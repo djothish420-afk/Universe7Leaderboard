@@ -1,0 +1,13 @@
+name: Universe7Leaderboard
+version: 1.0.0
+main: com.universe7.leaderboard.Universe7Leaderboard
+api-version: '1.21'
+softdepend: [Vault]
+commands:
+  u7lb:
+    description: Manage Universe 7 leaderboards
+    usage: /u7lb help
+    permission: universe7leaderboard.admin
+permissions:
+  universe7leaderboard.admin:
+    default: op
