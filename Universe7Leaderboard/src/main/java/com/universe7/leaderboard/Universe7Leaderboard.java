@@ -33,7 +33,7 @@ public class Universe7Leaderboard extends JavaPlugin {
         setupEconomy();
         loadDisplays();
         Objects.requireNonNull(getCommand("u7lb")).setExecutor(this);
-        Bukkit.getScheduler().runTaskTimer(this, this::refreshDisplays, 20L * 30, 20L * 60);
+        Bukkit.getScheduler().runTaskTimer(this, this::refreshDisplays, 20L * 30, 20L * 30);
         getLogger().info("Universe7Leaderboard enabled.");
     }
 
@@ -156,7 +156,7 @@ public class Universe7Leaderboard extends JavaPlugin {
         List<OfflinePlayer> players = knownPlayers();
         players.sort((a, b) -> Double.compare(score(b, type), score(a, type)));
         List<String> out = new ArrayList<>();
-        out.add("&a&lUNIVERSE 7 &8» &fTop " + prettyType(type));
+        out.add("&6&lTOP " + (type.equalsIgnoreCase("kills") ? "KILLS" : prettyType(type).toUpperCase(Locale.ROOT)));
         int rank = 0;
         for (OfflinePlayer p : players) {
             double value = score(p, type);
@@ -166,6 +166,7 @@ public class Universe7Leaderboard extends JavaPlugin {
             if (rank >= 10) break;
         }
         if (rank == 0) out.add("&7No data found yet.");
+        out.add("&8----------------------");
         return out;
     }
 
@@ -182,7 +183,7 @@ public class Universe7Leaderboard extends JavaPlugin {
                 if (loc == null) { displays.remove(key); continue; }
                 TextDisplay td = loc.getWorld().spawn(loc, TextDisplay.class, display -> {
                     display.setPersistent(true);
-                    display.setBillboard(org.bukkit.entity.Display.Billboard.CENTER);
+                    display.setBillboard(org.bukkit.entity.Display.Billboard.FIXED);
                     display.setShadowed(true);
                     display.setSeeThrough(false);
                     display.setLineWidth(300);
@@ -227,7 +228,7 @@ public class Universe7Leaderboard extends JavaPlugin {
             Location loc = player.getLocation().clone().add(0, 2.2, 0);
             TextDisplay td = loc.getWorld().spawn(loc, TextDisplay.class, display -> {
                 display.setPersistent(true);
-                display.setBillboard(org.bukkit.entity.Display.Billboard.CENTER);
+                display.setBillboard(org.bukkit.entity.Display.Billboard.FIXED);
                 display.setShadowed(true);
                 display.setLineWidth(300);
                 display.setText(lines(type).stream().map(this::color).collect(Collectors.joining("\n")));
