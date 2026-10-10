@@ -1,3 +1,3 @@
 # Universe7Leaderboard
-# Holograms refresh every minute. Existing Minecraft stats are read from the server's saved player statistics.
+# Leaderboard holograms refresh every 30 seconds.
 displays: {}
