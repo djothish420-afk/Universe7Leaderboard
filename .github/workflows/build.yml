@@ -23,8 +23,13 @@ jobs:
 
       - name: Build plugin
         run: mvn --batch-mode -f Universe7Leaderboard/pom.xml clean package
+
+      - name: Find built JAR
+        run: find Universe7Leaderboard/target -maxdepth 1 -name '*.jar' -type f
+
       - name: Upload plugin JAR
         uses: actions/upload-artifact@v4
         with:
           name: Universe7Leaderboard-JAR
-          path: target/*.jar
+          path: Universe7Leaderboard/target/Universe7Leaderboard.jar
+          if-no-files-found: error
